@@ -1,18 +1,28 @@
 {
-  "extends": "@repo/typescript-config/nextjs.json",
+  "extends": "@repo/typescript/base.json",
   "compilerOptions": {
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "~/components": ["./src/shadcn/*"],
+      "~/utils": ["./src/lib/utils"],
+      "~/lib/*": ["./src/lib/*"],
+      "~/hooks": ["./src/hooks"],
+      "~/ui": ["./src/shadcn/*"],
+      "~/ui/*": ["./src/shadcn/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
-    "next.config.mjs",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "public/**/*"
   ],
   "exclude": ["node_modules"]
 }

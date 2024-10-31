@@ -1,8 +1,16 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@repo/typescript/base.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "paths": {
+      "~/components": ["./src/shadcn/*"],
+      "~/utils": ["./src/lib/utils"],
+      "~/lib/*": ["./src/lib/*"],
+      "~/hooks": ["./src/hooks"],
+      "~/ui": ["./src/shadcn/*"],
+      "~/ui/*": ["./src/shadcn/*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["*.ts", "src"],
+  "exclude": ["node_modules"]
 }
