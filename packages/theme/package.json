@@ -9,5 +9,8 @@
   "peerDependencies": {
     "react": "^18",
     "next": "^14"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0"
   }
 }
