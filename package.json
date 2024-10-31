@@ -8,7 +8,7 @@
     "clean": "turbo clean && rm -rf node_modules",
     "cid": "pnpm clean && pnpm install && pnpm dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "build:contract": "chmod +x ./build-contract.sh && ./build-contract.sh"
+    "build:contract": "chmod +x ./build-deploy.sh && ./build-deploy.sh"
   },
   "devDependencies": {
     "@repo/typescript": "workspace:*",

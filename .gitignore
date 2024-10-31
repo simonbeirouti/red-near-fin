@@ -36,3 +36,7 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Prisma
+packages/database/prisma/dev.db
+packages/database/prisma/dev.db-journal
