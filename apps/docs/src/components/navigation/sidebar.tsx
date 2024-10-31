@@ -1,4 +1,5 @@
 // @ts-nocheck
+"use client";
 
 import {AlignLeftIcon} from "@repo/icons";
 
@@ -16,18 +17,22 @@ import {NavMenu} from "@/components/navigation/navbar";
 import {Logo} from "@/components/navigation/logo";
 import PageMenu from "@/components/navigation/pagemenu";
 import Link from "next/link";
+import DebugMenu from "./debug-menu";
+import { usePathname } from "next/navigation";
 
 export function Sidebar() {
+	const pathname = usePathname();
+	
 	return (
-		<aside className="md:flex hidden flex-[1] min-w-[230px] sticky top-16 flex-col h-[94.5vh] overflow-y-auto">
-			<ScrollArea className="py-4">
-				<PageMenu />
-			</ScrollArea>
+		<aside className="sticky top-14 hidden md:block md:flex-[2]">
+			{pathname.startsWith("/docs") && <PageMenu />}
+			{pathname.startsWith("/debug") && <DebugMenu />}
 		</aside>
 	);
 }
 
 export function SheetLeft() {
+	const pathname = usePathname();
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
@@ -49,7 +54,8 @@ export function SheetLeft() {
 						<NavMenu isSheet />
 					</div>
 					<div className="mx-0 px-5">
-						<PageMenu isSheet />
+						{pathname.startsWith("/docs") && <PageMenu isSheet />}
+						{pathname.startsWith("/debug") && <DebugMenu isSheet />}
 					</div>
 				</ScrollArea>
 			</SheetContent>
