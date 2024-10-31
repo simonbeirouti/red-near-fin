@@ -1,7 +1,10 @@
 {
   "extends": "@repo/typescript/base.json",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@repo/*": ["../../packages/*"]
+    }
   },
   "include": ["packages/**/*", "apps/**/*"],
   "exclude": ["node_modules"]
