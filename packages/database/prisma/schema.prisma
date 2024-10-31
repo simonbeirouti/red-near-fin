@@ -1,0 +1,41 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = "file:./dev.db"
+}
+
+model Collection {
+    id          String   @id @default(cuid())
+    name        String
+    symbol      String
+    description String
+    size        Int
+    layers      Layer[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Layer {
+    id           String      @id @default(cuid())
+    name         String
+    order        Int
+    locked       Boolean     @default(false)
+    images       Image[]
+    Collection   Collection? @relation(fields: [collectionId], references: [id])
+    collectionId String?
+    createdAt    DateTime    @default(now())
+    updatedAt    DateTime    @updatedAt
+}
+
+model Image {
+    id        String   @id @default(cuid())
+    filename  String
+    path      String
+    layerId   String
+    Layer     Layer    @relation(fields: [layerId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
