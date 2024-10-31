@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card"
+import { useBitteWallet } from "@repo/mintbase"
 
 interface ContractFunction {
   name: string;
@@ -40,6 +41,7 @@ async function loadContractABI() {
 }
 
 export default function DebugPage() {
+  const { isConnected, activeAccountId, selector, connect } = useBitteWallet();
   const [contractABI, setContractABI] = useState<ContractABI | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -52,6 +54,10 @@ export default function DebugPage() {
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
+
+  if (!isConnected) {
+    return <div className="flex justify-center items-center min-h-screen"><Button onClick={connect}>Connect to Bitte</Button></div>;
+  }
 
   if (loading) {
     return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
@@ -68,34 +74,55 @@ export default function DebugPage() {
     }));
   };
 
-  const executeFunction = async (func: any) => {
+  const executeFunction = async (func: ContractFunction) => {
     try {
-      // Here you would integrate with your actual contract interaction logic
-      // This is a placeholder for demonstration
+      const functionArgs = func.params?.args.reduce((acc: any, arg: any) => ({
+        ...acc,
+        [arg.name]: inputs[`${func.name}_${arg.name}`]
+      }), {});
+
+      const wallet = await selector.wallet();
+      let result;
+
       if (func.kind === 'view') {
-        // Handle view function call
-        console.log(`Calling view function: ${func.name}`);
+        result = await wallet.viewMethod({
+          contractId: process.env.NEXT_PUBLIC_CONTRACT_NAME!,
+          method: func.name,
+          args: functionArgs || {}
+        });
       } else if (func.kind === 'call') {
-        // Handle call function
-        const functionArgs = func.params?.args.reduce((acc: any, arg: any) => ({
-          ...acc,
-          [arg.name]: inputs[`${func.name}_${arg.name}`]
-        }), {});
-        console.log(`Calling function: ${func.name} with args:`, functionArgs);
+        result = await wallet.signAndSendTransaction({
+          signerId: activeAccountId,
+          receiverId: process.env.NEXT_PUBLIC_CONTRACT_NAME!,
+          actions: [{
+            type: 'FunctionCall',
+            params: {
+              methodName: func.name,
+              args: functionArgs || {},
+              gas: '30000000000000',
+              deposit: '0'
+            }
+          }]
+        });
       }
-    } catch (error) {
+
+      setResults(prev => ({
+        ...prev,
+        [func.name]: result
+      }));
+    } catch (error: any) {
       console.error(`Error executing ${func.name}:`, error);
       setResults(prev => ({
         ...prev,
-        [func.name]: `Error: ${error}`
+        [func.name]: `Error: ${error.message || error}`
       }));
     }
   };
 
   return (
-    <main className="flex flex-col items-center justify-center p-8">
+    <main className="flex flex-col items-center justify-center p-2">
       <div className="w-full max-w-3xl space-y-6">
-        {contractABI.body.functions.map((func: any) => (
+        {contractABI.body.functions.map((func: ContractFunction) => (
           <Card key={func.name} className="w-full">
             <CardHeader>
               <CardTitle className="flex justify-between items-center">
@@ -106,8 +133,7 @@ export default function DebugPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Render inputs for function parameters if they exist */}
-              {func.params?.args.map((arg: any) => (
+              {func.params?.args.map((arg) => (
                 <div key={arg.name} className="space-y-2">
                   <label className="text-sm font-medium">
                     {arg.name} ({arg.type_schema.type})
@@ -128,7 +154,6 @@ export default function DebugPage() {
                 Execute {func.name}
               </Button>
 
-              {/* Display results if any */}
               {results[func.name] && (
                 <div className="mt-4 p-4 bg-slate-100 rounded">
                   <pre className="text-sm">
