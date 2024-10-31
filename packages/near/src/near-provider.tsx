@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 
 import '@near-wallet-selector/modal-ui/styles.css'

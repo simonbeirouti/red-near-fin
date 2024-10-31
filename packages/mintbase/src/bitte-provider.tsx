@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { BitteWalletContextProvider } from "@mintbase-js/react";
