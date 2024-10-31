@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client'
 
-import { useBitteWallet } from "@mintbase-js/react"
+import { useBitteWallet } from "@repo/mintbase"
 import { Button } from "@repo/ui/button"
 import { useEffect, useState } from "react"
 

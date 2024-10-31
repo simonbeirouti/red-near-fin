@@ -1,9 +1,9 @@
 // @ts-nocheck
 "use client"
 
-import { useBitteWallet } from "@mintbase-js/react"
+import { useBitteWallet } from "@repo/mintbase"
 import { Button } from "@repo/ui/button"
-import { LogIn, LogOut } from "lucide-react"
+import { LogIn, LogOut } from "@repo/icons"
 import { useSidebar } from "@repo/ui/shadcn-sidebar"
 
 export function NavUser() {

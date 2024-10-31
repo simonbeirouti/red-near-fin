@@ -2,7 +2,7 @@
 "use client";
 
 import {useState} from "react";
-import {Box, Plus, ChevronsUpDown} from "lucide-react";
+import {Box, Plus, ChevronsUpDown} from "@repo/icons";
 // import { useBitteWallet } from "@mintbase-js/react"
 import Image from "next/image";
 import {
@@ -72,7 +72,7 @@ export function DashboardHeader({
 											height={32}
 											src={activeTeam.image}
 											alt={activeTeam.name}
-											className={`size-4 rounded-full ${
+											className={`size-7 rounded-full ${
 												state !== "expanded"
 													? "ml-1.5"
 													: ""

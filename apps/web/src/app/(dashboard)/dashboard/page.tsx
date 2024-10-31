@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Users } from "lucide-react";
+import {Users} from "@repo/icons";
 import {Card, CardContent, CardHeader, CardTitle} from "@repo/ui/card";
 
 export default function DashboardPage() {

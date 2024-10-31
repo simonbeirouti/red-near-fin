@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import {ChevronRight, type LucideIcon} from "lucide-react";
+import {ChevronRight, type LucideIcon} from "@repo/icons";
 import Link from "next/link";
 import Image from "next/image";
 

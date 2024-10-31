@@ -9,7 +9,7 @@ import {
 	Image,
 	BadgeDollarSign,
 	LucideIcon,
-} from "lucide-react";
+} from "@repo/icons";
 
 import {NavUser} from "@/components/nav-user";
 import {DashboardHeader} from "@/components/dashboard-header";
@@ -34,33 +34,36 @@ interface NavItem {
 	icon?: LucideIcon;
 }
 
+const addDashboardPrefix = (url: string) => `/dashboard${url}`;
+
+
 export const links: NavSection[] = [
 	{
 		label: "Main",
 		items: [
 			{
 				title: "Proposals",
-				url: "/proposals",
+				url: addDashboardPrefix("/proposals"),
 				icon: BookOpenText,
 			},
 			{
 				title: "Members",
-				url: "/members",
+				url: addDashboardPrefix("/members"),
 				icon: Contact,
 			},
 			{
 				title: "Designer",
-				url: "/designer",
+				url: addDashboardPrefix("/designer"),
 				icon: Image,
 			},
 			{
 				title: "Auction",
-				url: "/auction",
+				url: addDashboardPrefix("/auction"),
 				icon: BadgeDollarSign,
 			},
 			{
 				title: "Token",
-				url: "/token",
+				url: addDashboardPrefix("/token"),
 				icon: Bitcoin,
 				// isActive: pathname.startsWith('/'),
 				// items: [
