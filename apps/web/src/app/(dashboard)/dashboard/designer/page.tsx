@@ -61,21 +61,21 @@ export default function NFTDesignerPage() {
 	useEffect(() => {
 		async function loadLayers() {
 			try {
-				const response = await fetch("/api/layers");
-				const data = await response.json();
+				// const response = await fetch("/api/layers");
+				// const data = await response.json();
 
-				const loadedLayers = data.map((layer: any) => ({
-					id: layer.id,
-					name: layer.name,
-					order: layer.order,
-					locked: layer.locked,
-					images: layer.images.map((img: any) => ({
-						path: img.path,
-						filename: img.filename,
-					})),
-				}));
+				// const loadedLayers = data.map((layer: any) => ({
+				// 	id: layer.id,
+				// 	name: layer.name,
+				// 	order: layer.order,
+				// 	locked: layer.locked,
+				// 	images: layer.images.map((img: any) => ({
+				// 		path: img.path,
+				// 		filename: img.filename,
+				// 	})),
+				// }));
 
-				setLayerFolders(loadedLayers);
+				// setLayerFolders(loadedLayers);
 			} catch (error) {
 				console.error("Failed to load layers:", error);
 			}
@@ -135,27 +135,27 @@ export default function NFTDesignerPage() {
 								formData.append("images", file);
 							});
 
-							// Save to API
-							const response = await fetch("/api/layers", {
-								method: "POST",
-								body: formData,
-							});
+							// // Save to API
+							// const response = await fetch("/api/layers", {
+							// 	method: "POST",
+							// 	body: formData,
+							// });
 
-							if (!response.ok) {
-								throw new Error("Failed to save layer");
-							}
+							// if (!response.ok) {
+							// 	throw new Error("Failed to save layer");
+							// }
 
-							// Update state with the response
-							const savedLayer = await response.json();
-							setLayerFolders((prev) => [
-								...prev,
-								{
-									id: savedLayer.id,
-									name: entry.name,
-									images: savedLayer.images,
-									order: order,
-								},
-							]);
+							// // Update state with the response
+							// const savedLayer = await response.json();
+							// setLayerFolders((prev) => [
+							// 	...prev,
+							// 	{
+							// 		id: savedLayer.id,
+							// 		name: entry.name,
+							// 		images: savedLayer.images,
+							// 		order: order,
+							// 	},
+							// ]);
 						}
 					}
 				};
@@ -183,13 +183,13 @@ export default function NFTDesignerPage() {
 
 		if (newOrder === "delete") {
 			try {
-				const response = await fetch(`/api/layers?id=${folderId}`, {
-					method: "DELETE",
-				});
+				// const response = await fetch(`/api/layers?id=${folderId}`, {
+				// 	method: "DELETE",
+				// });
 
-				if (!response.ok) {
-					throw new Error("Failed to delete layer");
-				}
+				// if (!response.ok) {
+				// 	throw new Error("Failed to delete layer");
+				// }
 
 				setLayerFolders(prev => {
 					const folderToDelete = prev.find(f => f.id === folderId);
@@ -214,19 +214,19 @@ export default function NFTDesignerPage() {
 		const numOrder = parseInt(newOrder);
 		try {
 			// Update the order in the database
-			const response = await fetch(`/api/layers?id=${folderId}`, {
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					order: numOrder,
-				}),
-			});
+			// const response = await fetch(`/api/layers?id=${folderId}`, {
+			// 	method: "PATCH",
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// 	body: JSON.stringify({
+			// 		order: numOrder,
+			// 	}),
+			// });
 
-			if (!response.ok) {
-				throw new Error("Failed to update layer order");
-			}
+			// if (!response.ok) {
+			// 	throw new Error("Failed to update layer order");
+			// }
 
 			// Update local state
 			setLayerFolders(prev => {
@@ -260,26 +260,26 @@ export default function NFTDesignerPage() {
 		currentLocked: boolean
 	) => {
 		try {
-			const response = await fetch(`/api/layers?id=${folderId}`, {
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					locked: !currentLocked,
-				}),
-			});
+			// const response = await fetch(`/api/layers?id=${folderId}`, {
+			// 	method: "PATCH",
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// 	body: JSON.stringify({
+			// 		locked: !currentLocked,
+			// 	}),
+			// });
 
-			if (!response.ok) {
-				throw new Error("Failed to update layer");
-			}
+			// if (!response.ok) {
+			// 	throw new Error("Failed to update layer");
+			// }
 
-			const updatedLayer = await response.json();
+			// const updatedLayer = await response.json();
 
 			setLayerFolders((prev) =>
 				prev.map((folder) =>
 					folder.id === folderId
-						? {...folder, locked: updatedLayer.locked}
+						? {...folder, locked: !currentLocked}
 						: folder
 				)
 			);
@@ -410,25 +410,25 @@ export default function NFTDesignerPage() {
 						formData.append("images", file);
 					});
 
-					const response = await fetch("/api/layers", {
-						method: "POST",
-						body: formData,
-					});
+					// const response = await fetch("/api/layers", {
+					// 	method: "POST",
+					// 	body: formData,
+					// });
 
-					if (!response.ok) {
-						throw new Error(`Failed to save layer ${dirName}`);
-					}
+					// if (!response.ok) {
+					// 	throw new Error(`Failed to save layer ${dirName}`);
+					// }
 
-					const savedLayer = await response.json();
-					setLayerFolders((prev) => [
-						...prev,
-						{
-							id: savedLayer.id,
-							name: dirName,
-							images: savedLayer.images,
-							order: order,
-						},
-					]);
+					// const savedLayer = await response.json();
+					// setLayerFolders((prev) => [
+					// 	...prev,
+					// 	{
+					// 		id: savedLayer.id,
+					// 		name: dirName,
+					// 		images: savedLayer.images,
+					// 		order: order,
+					// 	},
+					// ]);
 				}
 			}
 		} catch (error) {
@@ -466,23 +466,23 @@ export default function NFTDesignerPage() {
 			const collectionData = await prepareNFTCollectionData(layerData);
 
 			// Send the collection data to your API
-			const response = await fetch("/api/nft-collection", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					metadata,
-					collection: collectionData,
-				}),
-			});
+			// const response = await fetch("/api/nft-collection", {
+			// 	method: "POST",
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// 	body: JSON.stringify({
+			// 		metadata,
+			// 		collection: collectionData,
+			// 	}),
+			// });
 
-			if (!response.ok) {
-				throw new Error("Failed to generate collection");
-			}
+			// if (!response.ok) {
+			// 	throw new Error("Failed to generate collection");
+			// }
 
-			const result = await response.json();
-			console.log("Collection generated:", result);
+			// const result = await response.json();
+			// console.log("Collection generated:", result);
 
 			// Handle success (e.g., show success message, redirect to collection page)
 		} catch (error) {
