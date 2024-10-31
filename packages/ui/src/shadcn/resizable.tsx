@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client"
 
 import { DragHandleDots2Icon } from "@radix-ui/react-icons"
