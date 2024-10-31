@@ -95,10 +95,6 @@ export default function DebugPage() {
   return (
     <main className="flex flex-col items-center justify-center p-8">
       <div className="w-full max-w-3xl space-y-6">
-        <h1 className="text-3xl font-bold text-center mb-8">
-          Contract Debug Interface
-        </h1>
-        
         {contractABI.body.functions.map((func: any) => (
           <Card key={func.name} className="w-full">
             <CardHeader>
