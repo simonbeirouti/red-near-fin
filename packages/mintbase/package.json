@@ -1,0 +1,12 @@
+{
+  "name": "@repo/mintbase",
+  "version": "0.0.1",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "dependencies": {
+    "@mintbase-js/react": "latest"
+  },
+  "peerDependencies": {
+    "react": "^18"
+  }
+}

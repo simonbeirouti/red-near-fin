@@ -1,0 +1,12 @@
+{
+  "name": "@repo/near",
+  "version": "0.0.1",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "dependencies": {
+    "@near-wallet-selector/modal-ui": "latest"
+  },
+  "peerDependencies": {
+    "react": "^18"
+  }
+}
