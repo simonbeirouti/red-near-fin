@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.4.0",
+  "metadata": {
+    "name": "nft_series_contract",
+    "version": "0.1.0",
+    "authors": [
+      "Near Inc <hello@nearprotocol.com>"
+    ],
+    "build": {
+      "compiler": "rustc 1.81.0",
+      "builder": "cargo-near cargo-near-build 0.2.0"
+    },
+    "wasm_hash": "Ds79qkf7cqJysFRqud6xu7df8s7nrN3pdBStjGxQQAhq"
+  },
+  "body": {
+    "functions": [
+      {
+        "name": "contract_source_metadata",
+        "kind": "view"
+      },
+      {
+        "name": "get_greeting",
+        "kind": "view",
+        "result": {
+          "serialization_type": "json",
+          "type_schema": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "name": "set_greeting",
+        "kind": "call",
+        "params": {
+          "serialization_type": "json",
+          "args": [
+            {
+              "name": "greeting",
+              "type_schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "root_schema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "String",
+      "type": "string"
+    }
+  }
+}
