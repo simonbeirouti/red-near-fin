@@ -1,11 +1,10 @@
-'use client';
+"use client"
 
-import * as React from 'react';
+import * as React from "react"
+import { CheckIcon } from "@radix-ui/react-icons"
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
-import { CheckIcon } from '@radix-ui/react-icons';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils"
 
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
@@ -13,13 +12,13 @@ const RadioGroup = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
-      className={cn('grid gap-2', className)}
+      className={cn("grid gap-2", className)}
       {...props}
       ref={ref}
     />
-  );
-});
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
+  )
+})
+RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
@@ -29,8 +28,8 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        'aspect-square h-4 w-4 rounded-full border border-primary text-primary shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
-        className,
+        "aspect-square h-4 w-4 rounded-full border border-primary text-primary shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+        className
       )}
       {...props}
     >
@@ -38,33 +37,8 @@ const RadioGroupItem = React.forwardRef<
         <CheckIcon className="h-3.5 w-3.5 fill-primary" />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
-  );
-});
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
+  )
+})
+RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
 
-const RadioGroupItemLabel = (
-  props: React.PropsWithChildren<{
-    className?: string;
-    selected?: boolean;
-  }>,
-) => {
-  return (
-    <label
-      className={cn(
-        props.className,
-        'flex cursor-pointer rounded-md' +
-          ' items-center space-x-4 border border-input' +
-          ' transition-duration-500 p-4 text-sm transition-all focus-within:border-primary',
-        {
-          [`border-primary`]: props.selected,
-          [`hover:border-primary`]: !props.selected,
-        },
-      )}
-    >
-      {props.children}
-    </label>
-  );
-};
-RadioGroupItemLabel.displayName = 'RadioGroupItemLabel';
-
-export { RadioGroup, RadioGroupItem, RadioGroupItemLabel };
+export { RadioGroup, RadioGroupItem }
