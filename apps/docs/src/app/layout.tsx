@@ -42,7 +42,7 @@ export default function RootLayout({
 							<main className="px-5 sm:px-8 h-auto">
 								{children}
 							</main>
-							<Footer />
+							{/* <Footer /> */}
 						</NearProvider>
 					</BitteProvider>
 				</ThemeProvider>
