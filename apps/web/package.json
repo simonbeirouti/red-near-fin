@@ -14,9 +14,11 @@
     "@repo/near": "workspace:*",
     "@repo/theme": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@tanstack/react-table": "^8.20.5",
     "next": "14.2.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "zod": "3.23.8",
     "zustand": "5.0.1"
   },
   "devDependencies": {
